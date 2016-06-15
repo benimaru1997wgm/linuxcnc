@@ -1164,6 +1164,19 @@ AC_MSG_RESULT([$sincos_ok])
 AC_CHECK_FUNCS(__sincos)
 LIBS=$LIBS_hold
 
+LIBS_hold=$LIBS
+LIBS=
+AC_SEARCH_LIBS(dlopen, [c dl], [
+    case "$LIBS" in
+    (-lc) LIBDL= ;;
+    (*)   LIBDL="$LIBS"
+    esac
+
+    AC_DEFINE([LIBDL], [$LIBDL], [Define to the library that dlopen comes from, if it is not a part of libc])
+], [AC_MSG_ERROR([not found])])
+AC_SUBST([LIBDL])
+LIBS=$LIBS_hold
+
 AH_BOTTOM(#endif
 )
 

@@ -1164,6 +1164,11 @@ AC_MSG_RESULT([$sincos_ok])
 AC_CHECK_FUNCS(__sincos)
 LIBS=$LIBS_hold
 
+AC_SEARCH_LIBS(clock_nanosleep, [rt], [
+    AC_DEFINE([HAVE_CLOCK_NANOSLEEP], 1,
+        [Define to 1 if clock_nanosleep is available (in -lc or -lrt)])
+])
+
 AH_BOTTOM(#endif
 )
 
